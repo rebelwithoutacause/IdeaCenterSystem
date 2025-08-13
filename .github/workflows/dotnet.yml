@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     env:
       TEST_USER_EMAIL: "testmail@mail.com"
@@ -17,13 +16,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: IdeaAPI
+
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      working-directory: IdeaAPI
+
     - name: Test
       run: dotnet test --configuration Release --no-build
+      working-directory: IdeaAPI
